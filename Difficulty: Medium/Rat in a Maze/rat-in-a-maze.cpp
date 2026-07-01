@@ -1,20 +1,22 @@
 class Solution {
   public:
     vector<string>result;
-    int n,m;
+    int n;
     void solve(vector<vector<int>>& maze, int i, int j, string&temp)
     {
         
         
+        if(i<0 || i>=n || j<0 || j>=m || maze[i][j] == 0) return;
+      
         if(i == n-1 && j == m-1) 
         {
             result.push_back(temp);
             return;
         }
-        
-        if(i<0 || i>=n || j<0 || j>=m || maze[i][j] == 0) return;
-        
+
+        int x = maze[i][j]
         maze[i][j] = 0;
+
         temp.push_back('D');
         solve(maze, i+1, j, temp);
         temp.pop_back();
@@ -31,7 +33,7 @@ class Solution {
         solve(maze, i-1, j, temp);
         temp.pop_back();
         
-        maze[i][j] = 1;
+        maze[i][j] = x;
     }
     vector<string> ratInMaze(vector<vector<int>>& maze) 
     {
