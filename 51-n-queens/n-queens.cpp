@@ -41,9 +41,9 @@ public:
             {
                 board[row][col] = 'Q';
                 solve(board, row+1);
+                board[row][col] = '.';
             }
-            
-            board[row][col] = '.';
+        
         }
     }
     vector<vector<string>> solveNQueens(int n) 
