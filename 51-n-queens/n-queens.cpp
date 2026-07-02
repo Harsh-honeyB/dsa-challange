@@ -11,6 +11,13 @@ public:
             if(board[i][col] == 'Q') return false;
         }
 
+        // check horizontal //
+
+        for(int i = col; i<N;  i++)
+        {
+            if(board[row][i] == 'Q') return false;
+        }
+
         // check left daigonal //
         for(int i = row - 1, j = col - 1; i>=0 && j>=0; i--,j--)
         {
