@@ -2,43 +2,51 @@ class Solution {
 public:
     int myAtoi(string s)
     {
-        int i = 0;
         int n = s.size();
 
-        while(i < n && s[i] == ' ')
+        if(n == 0) return 0;
+
+        int i = 0;
+
+        while(i<n && s[i] == ' ')
         {
             i++;
         }
 
         bool neg = false;
-
-        if(i < n && (s[i] == '-' || s[i] == '+'))
-        {
-            if(s[i] == '-')
-                neg = true;
-
-            i++;
-        }
-
         long long ans = 0;
 
-        while(i < n && s[i] >= '0' && s[i] <= '9')
+        if(i<n && s[i] == '-')
         {
-            int digit = s[i] - '0';
+            neg = true;
+            i++;
+        }
 
-            ans = ans * 10 + digit;
+        else if(i<n && s[i] == '+') i++;
+       
 
-            if(!neg && ans > INT_MAX)
-                return INT_MAX;
+        while(i<n && s[i] >= '0' && s[i] <= '9')
+        {
+            int dig = s[i] - '0';
 
-            if(neg && -ans < INT_MIN)
-                return INT_MIN;
+            ans = ans*10 + dig;
+
+            if(neg == true)
+            {
+                long long check = -ans;
+                if(check < INT_MIN) return INT_MIN;
+            }
+
+            else
+            {
+                if(ans > INT_MAX) return INT_MAX;
+            }
 
             i++;
         }
 
-        if(neg)
-            ans = -ans;
+        if(neg == true) ans = -ans;
+
 
         return ans;
     }
