@@ -1,33 +1,25 @@
 class Solution {
 public:
-    // vector<vector<int>>result;
-    set<vector<int>>st;
-    void solve(vector<int>& nums, int target, int idx, vector<int>& temp)
-    {
-        if(target == 0)
-        {
-            st.insert(temp);
+    void solve(vector<int>& candidates, int target, vector<int> curr, vector<vector<int>>& result, int idx) {
+        if(target < 0)
+            return;
+        if(target == 0) {
+            result.push_back(curr);
             return;
         }
-        if(target < 0) return;
-        for(int i = idx; i<nums.size(); i++)
-        {
-            if(i > idx && nums[i] == nums[i-1]) continue;
-            temp.push_back(nums[i]);
-            solve(nums, target - nums[i], i+1, temp);
-            temp.pop_back();
-        }
-
-    }
-    vector<vector<int>> combinationSum2(vector<int>& nums, int target) 
-    {
-        int n = nums.size();
-        sort(nums.begin(), nums.end());
-        vector<int>temp;
-        solve(nums, target, 0, temp);
-        vector<vector<int>> result(st.begin(), st.end());
-        return result;
-     
         
+        for(int i = idx; i<candidates.size(); i++) {
+            if(i > idx && candidates[i] == candidates[i-1]) continue; //ignore duplicate elements
+            curr.push_back(candidates[i]);
+            solve(candidates, target-candidates[i], curr, result, i+1);
+            curr.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<vector<int>> result;
+        vector<int> curr;
+        sort(candidates.begin(), candidates.end()); //because we will ignore duplicate elements
+        solve(candidates, target, curr, result, 0);
+        return result;
     }
 };
