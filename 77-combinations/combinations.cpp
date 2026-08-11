@@ -8,19 +8,13 @@ public:
             result.push_back(temp);
             return;
         }
-        
+
         if(idx == v.size()) return;
 
-        // temp.push_back(v[idx]);
-        // solve(v, idx+1, k-1, temp);
-        // temp.pop_back();
-        // solve(v, idx+1, k, temp);
-        for(int i = idx; i<v.size(); i++)
-        {
-            temp.push_back(v[i]);
-            solve(v, i+1, k-1, temp);
-            temp.pop_back();
-        }
+        temp.push_back(v[idx]);
+        solve(v, idx+1, k-1, temp);
+        temp.pop_back();
+        solve(v, idx+1, k, temp);
 
     }
     vector<vector<int>> combine(int n, int k) 
