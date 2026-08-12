@@ -13,12 +13,16 @@ public:
             return;
         }
 
-            temp.push_back(candidates[idx]);
-            target = target - candidates[idx];
-            solve(idx, candidates, temp, target);
+        for(int i = idx; i<n; i++)
+        {
+            temp.push_back(candidates[i]);
+            target = target - candidates[i];
+            solve(i, candidates, temp, target);
             temp.pop_back();
-            target = target + candidates[idx];
-            solve(idx+1, candidates, temp, target);
+            target = target + candidates[i];
+
+        }
+            
 
 
         
