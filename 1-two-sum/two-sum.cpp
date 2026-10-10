@@ -3,16 +3,20 @@ public:
     vector<int> twoSum(vector<int>& nums, int target) 
     {
         int n = nums.size();
+        unordered_map<int, int>mp;
+
         for(int i = 0; i<n; i++)
         {
-            int sum = 0;
-            for(int j = i+1; j<n; j++)
+            int key = target - nums[i];
+            
+            if(mp.find(key)!=mp.end())
             {
-                sum = nums[i] + nums[j];
-                if(sum == target)
-                {
-                    return {i, j};
-                }
+                return {mp[key], i};
+            }
+
+            else
+            {
+                mp[nums[i]] = i;
             }
         }
 
